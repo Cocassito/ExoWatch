@@ -10,6 +10,9 @@ class SceneManager {
     this.lightManager = new LightManager(this.scene);
     this.modelLoader = new ModelLoader(this.scene);
     this.animate();
+    
+    // Écouter l'événement de redimensionnement de la fenêtre
+    window.addEventListener('resize', () => this.onWindowResize());
   }
 
   initScene() {
@@ -30,6 +33,13 @@ class SceneManager {
   animate() {
     requestAnimationFrame(() => this.animate());
     this.renderer.render(this.scene, this.camera);
+  }
+
+  onWindowResize() {
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();  
   }
 }
 

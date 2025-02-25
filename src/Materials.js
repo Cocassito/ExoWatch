@@ -1,6 +1,13 @@
 import { MeshStandardMaterial } from "three";
 
 const Materials = {
+
+  pink: new MeshStandardMaterial({
+    color: 0xd814ff,
+    emissive: 0x000000,
+    metalness: 0,
+    roughness: 0.135,
+  }),
   platine: new MeshStandardMaterial({
     color: 0x808080,
     metalness: 1,

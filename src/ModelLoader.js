@@ -11,7 +11,7 @@ class ModelLoader {
   loadModel() {
     return new Promise((resolve, reject) => {
       this.loader.load(
-        "models/ExoWatch14.glb", 
+        "models/ExoWatchFINAL.glb", 
         (gltf) => {
           this.scene.add(gltf.scene);
           this.extractParts(gltf.scene);
@@ -28,6 +28,7 @@ class ModelLoader {
 
   extractParts(model) {
     this.platine = model.children[0];
+    this.pink = model.children[6];
     this.caches = [model.children[1], model.children[2]];
     this.wheels = [model.children[3], model.children[4], model.children[5]];
     this.barrels = [model.children[7], model.children[8]];

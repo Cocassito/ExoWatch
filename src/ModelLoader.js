@@ -11,29 +11,55 @@ class ModelLoader {
   loadModel() {
     return new Promise((resolve, reject) => {
       this.loader.load(
-        "models/ExoWatchFINAL.glb", 
+        "models/ExoWatchFINAL.glb",
         (gltf) => {
           this.scene.add(gltf.scene);
           this.extractParts(gltf.scene);
           this.applyMaterials();
-          resolve(); 
+          resolve();
         },
-        undefined, 
+        undefined,
         (error) => {
-          reject(error); 
+          reject(error);
         }
       );
     });
   }
 
   extractParts(model) {
+    console.log(model.children);
+
     this.platine = model.children[0];
-    this.pink = model.children[6];
     this.caches = [model.children[1], model.children[2]];
-    this.wheels = [model.children[3], model.children[4], model.children[5]];
-    this.barrels = [model.children[7], model.children[8]];
+    this.wheelsCache = [
+      model.children[3],
+      model.children[4],
+      model.children[5],
+    ];
+    this.wheels = [
+      model.children[6],
+      model.children[7],
+      model.children[8],
+      model.children[9],
+    ];
+    this.barrels = [model.children[10], model.children[11]];
+    this.vis = [
+      model.children[12],
+      model.children[13],
+      model.children[14],
+      model.children[15],
+      model.children[16],
+      model.children[17],
+      model.children[18],
+      model.children[19],
+    ];
+    this.pink = [
+      model.children[20],
+      model.children[21],
+      model.children[22],
+      model.children[23],
+    ];
   }
-  
 
   applyMaterials() {
     if (this.platine) this.platine.material = Materials.platine;

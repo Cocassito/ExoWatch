@@ -1,4 +1,10 @@
-import { AmbientLight, DirectionalLight, PointLight } from "three";
+import {
+  AmbientLight,
+  DirectionalLight,
+  PointLight,
+  DirectionalLightHelper,
+  PointLightHelper,
+} from "three";
 
 class LightManager {
   constructor(scene) {
@@ -12,14 +18,34 @@ class LightManager {
 
     const directionalLight1 = new DirectionalLight(0xffffff, 1);
     const directionalLight2 = new DirectionalLight(0xffffff, 1);
+    const directionalLight3 = new DirectionalLight(0xffffff, 0.5);
+
     directionalLight1.position.set(7, 6, 7);
     directionalLight2.position.set(-7, -6, -7);
+    directionalLight3.position.set(-7, 5, 8);
+
     this.scene.add(directionalLight1);
     this.scene.add(directionalLight2);
+    this.scene.add(directionalLight3);
 
     const pointLight = new PointLight(0xffffff, 1, 100);
     pointLight.position.set(10, -10, 10);
     this.scene.add(pointLight);
+
+    // Helpers pour voir les lumières
+    const dirLightHelper1 = new DirectionalLightHelper(directionalLight1, 1);
+    const dirLightHelper2 = new DirectionalLightHelper(directionalLight2, 1);
+    const dirLightHelper3 = new DirectionalLightHelper(directionalLight3, 1);
+    const pointLightHelper = new PointLightHelper(pointLight, 1);
+
+    const showLightHelpers = true; // Change en false pour les masquer
+
+    if (showLightHelpers) {
+      this.scene.add(dirLightHelper1);
+      this.scene.add(dirLightHelper2);
+      this.scene.add(dirLightHelper3);
+      this.scene.add(pointLightHelper);
+    }
   }
 }
 

@@ -1,0 +1,23 @@
+body{
+    padding: 0;
+    margin: 0;
+    font-family: "Spectral", serif;
+    font-size: 16px;
+
+}
+
+
+.title{
+    text-transform: uppercase;
+}
+
+.corps{
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.separateur{
+    height: 1px;
+    width: 100%;
+    background-color: white;
+}

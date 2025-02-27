@@ -41,7 +41,7 @@ class SceneManager {
   initControls() {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true; 
-    this.controls.enabled = false; 
+    this.controls.enabled = false ; 
 
   }
 

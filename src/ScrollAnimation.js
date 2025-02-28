@@ -141,7 +141,7 @@ class ScrollAnimation {
       "#textWheelEscape2",
       { opacity: 1 },
       { opacity: 0, duration: 2 },
-      48
+      37
     );
 
     timeline.to(pointLight2, { intensity: 0, duration: 8 }, 37);
@@ -156,6 +156,118 @@ class ScrollAnimation {
       this.wheels[1].rotation,
       { ...this.originalRotation, duration: 10 },
       37
+    );
+
+    //ORIGINE DE LA POSITION DE WHEELS2 + ANIMATION
+    this.originalRotation = { ...this.wheels[2].rotation };
+    this.originalPosition = { ...this.wheels[2].position };
+    const pointLight3 = this.lightManager.pointLight3;
+    pointLight3.position.set(0, 3, 0);
+    this.wheels[2].add(pointLight3);
+
+
+    timeline.to(this.wheels[2].position, { z: 3, duration: 3 }, 39);
+    timeline.to(
+      this.wheels[2].rotation,
+      { y: 3.5, x: 6, z: 3.25, duration: 5 },
+      39
+    );
+
+    timeline.to(
+      this.wheels[2].position,
+      { y: -3.5, x: 0.1, z: 3.25, duration: 7 },
+      43
+    );
+    timeline.to(
+      this.wheels[2].rotation,
+      { y: 6.5, x: 6, z: 3.25, duration: 7 },
+      43
+    );
+
+    timeline.fromTo(
+      "#textWheelEscape3",
+      { opacity: 0 },
+      { opacity: 1, duration: 2 },
+      45
+    );
+
+    timeline.to(pointLight3, { intensity: 0.6, duration: 8 }, 46);
+
+    timeline.fromTo(
+      "#textWheelEscape3",
+      { opacity: 1 },
+      { opacity: 0, duration: 2 },
+      56
+    );
+
+    timeline.to(pointLight3, { intensity: 0, duration: 8 }, 56);
+
+
+    timeline.to(
+      this.wheels[2].position,
+      { ...this.originalPosition, duration: 10 },
+      56
+    );
+    timeline.to(
+      this.wheels[2].rotation,
+      { ...this.originalRotation, duration: 10 },
+      56
+    );
+
+    //ORIGINE DE LA POSITION DE WHEELS0 + ANIMATION
+    this.originalRotation = { ...this.wheels[0].rotation };
+    this.originalPosition = { ...this.wheels[0].position };
+    const pointLight4 = this.lightManager.pointLight4;
+    pointLight4.position.set(0, 3, 0);
+    this.wheels[0].add(pointLight4);
+
+
+    timeline.to(this.wheels[0].position, { z: 3, duration: 3 }, 58);
+    timeline.to(
+      this.wheels[0].rotation,
+      { y: 3.5, x: 6, z: 3.25, duration: 5 },
+      58
+    );
+
+    timeline.to(
+      this.wheels[0].position,
+      { y: -3.5, x: 0.1, z: 3.25, duration: 7 },
+      62
+    );
+    timeline.to(
+      this.wheels[0].rotation,
+      { y: 6.5, x: 6, z: 3.25, duration: 7 },
+      62
+    );
+
+    timeline.fromTo(
+      "#textWheelEscape4",
+      { opacity: 0 },
+      { opacity: 1, duration: 2 },
+      64
+    );
+
+    timeline.to(pointLight4, { intensity: 0.6, duration: 8 }, 65);
+
+    timeline.fromTo(
+      "#textWheelEscape4",
+      { opacity: 1 },
+      { opacity: 0, duration: 2 },
+      75
+    );
+
+    timeline.to(pointLight4, { intensity: 0, duration: 8 }, 75);
+
+
+    timeline.to(
+      this.wheels[0].position,
+      { ...this.originalPosition, duration: 10 },
+      75
+    );
+    timeline.to(
+      this.wheels[0].rotation,
+      { ...this.originalRotation, duration: 10 },
+      75
     );
 
   }

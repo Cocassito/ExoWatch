@@ -12,6 +12,7 @@ class ScrollAnimation {
       .loadModel()
       .then(() => {
         this.watch = sceneManager.modelLoader.watch;
+        this.barrels = sceneManager.modelLoader.barrels;
         this.platine = sceneManager.modelLoader.platine;
         this.cacheMain = sceneManager.modelLoader.cacheMain;
         console.log(this.cacheMain);
@@ -32,13 +33,13 @@ class ScrollAnimation {
       scrollTrigger: {
         trigger: document.body,
         start: "top top",
-        end: "+=300%",
-        scrub: 2,
+        end: "+=400%",
+        scrub: 3,
         pin: document.body,
       },
     });
 
-    //ANIMAION DE LA SCENE 
+    //ANIMAION DE LA SCENE
     timeline.to(this.scene.rotation, { x: -Math.PI / 2.5 }, 0);
     timeline.to(this.scene.position, { y: -2 }, 0);
 
@@ -46,7 +47,7 @@ class ScrollAnimation {
     this.cacheMain.reverse().forEach((item, index) => {
       timeline.to(item.position, { y: -4, duration: 3 }, 0.5);
     });
-    
+
     //ORIGINE DE LA POSITION DE WHEELS3 + ANIMATION
     this.originalRotation = { ...this.wheels[3].rotation };
     this.originalPosition = { ...this.wheels[3].position };
@@ -90,7 +91,6 @@ class ScrollAnimation {
 
     timeline.to(pointLight, { intensity: 0, duration: 8 }, 18);
 
-
     timeline.to(
       this.wheels[3].position,
       { ...this.originalPosition, duration: 10 },
@@ -108,7 +108,6 @@ class ScrollAnimation {
     const pointLight2 = this.lightManager.pointLight2;
     pointLight2.position.set(0, 3, 0);
     this.wheels[1].add(pointLight2);
-
 
     timeline.to(this.wheels[1].position, { z: 3, duration: 3 }, 20);
     timeline.to(
@@ -146,7 +145,6 @@ class ScrollAnimation {
 
     timeline.to(pointLight2, { intensity: 0, duration: 8 }, 37);
 
-
     timeline.to(
       this.wheels[1].position,
       { ...this.originalPosition, duration: 10 },
@@ -165,7 +163,6 @@ class ScrollAnimation {
     pointLight3.position.set(0, 3, 0);
     this.wheels[2].add(pointLight3);
 
-
     timeline.to(this.wheels[2].position, { z: 3, duration: 3 }, 39);
     timeline.to(
       this.wheels[2].rotation,
@@ -175,7 +172,7 @@ class ScrollAnimation {
 
     timeline.to(
       this.wheels[2].position,
-      { y: -3.5, x: 0.1, z: 3.25, duration: 7 },
+      { y: -3.3, x: 0.1, z: 3.25, duration: 7 },
       43
     );
     timeline.to(
@@ -202,7 +199,6 @@ class ScrollAnimation {
 
     timeline.to(pointLight3, { intensity: 0, duration: 8 }, 56);
 
-
     timeline.to(
       this.wheels[2].position,
       { ...this.originalPosition, duration: 10 },
@@ -221,7 +217,6 @@ class ScrollAnimation {
     pointLight4.position.set(0, 3, 0);
     this.wheels[0].add(pointLight4);
 
-
     timeline.to(this.wheels[0].position, { z: 3, duration: 3 }, 58);
     timeline.to(
       this.wheels[0].rotation,
@@ -231,7 +226,7 @@ class ScrollAnimation {
 
     timeline.to(
       this.wheels[0].position,
-      { y: -3.5, x: 0.1, z: 3.25, duration: 7 },
+      { y: -2.7, x: 0.1, z: 3.25, duration: 7 },
       62
     );
     timeline.to(
@@ -258,7 +253,6 @@ class ScrollAnimation {
 
     timeline.to(pointLight4, { intensity: 0, duration: 8 }, 75);
 
-
     timeline.to(
       this.wheels[0].position,
       { ...this.originalPosition, duration: 10 },
@@ -270,6 +264,46 @@ class ScrollAnimation {
       75
     );
 
+    //ORIGINE DE LA POSITION DE BARRELS + ANIMATION
+    this.originalPositions = this.barrels.map((item) => ({ ...item.position }));
+    this.originalRotations = this.barrels.map((item) => ({ ...item.rotation }));
+
+    this.barrels.forEach((item, index) => {
+      timeline.to(item.position, { z: 3, duration: 3 }, 77);
+      timeline.to(item.rotation, { y: 3.5, x: 6, z: 3.25, duration: 5 }, 77);
+
+      timeline.to(item.position, { y: -2.5, x: 0.1, z: 3.25, duration: 7 }, 81);
+      timeline.to(item.rotation, { y: 6.5, x: 8.3, z: 3.25, duration: 7 }, 81);
+
+      const offset = (index % 2 === 0 ? 1 : -1) * 0.8;
+
+      timeline.to(item.position, { x: offset, duration: 7 }, 86);
+
+      timeline.fromTo(
+        "#textMainspringBarrel",
+        { opacity: 0 },
+        { opacity: 1, duration: 2 },
+        88
+      );
+
+      timeline.fromTo(
+        "#textMainspringBarrel",
+        { opacity: 1 },
+        { opacity: 0, duration: 2 },
+        98
+      );
+
+      timeline.to(
+        item.position,
+        { ...this.originalPositions[index], duration: 10 },
+        98
+      );
+      timeline.to(
+        item.rotation,
+        { ...this.originalRotations[index], duration: 10 },
+        98
+      );
+    });
   }
 }
 

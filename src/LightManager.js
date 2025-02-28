@@ -19,6 +19,7 @@
         const directionalLight2 = new DirectionalLight(0xffffff, 1);
         const directionalLight3 = new DirectionalLight(0xffffff, 0.5);
         const pointLight = new PointLight(0xffffff, 0, 10, 2); 
+        const pointLight2 = new PointLight(0xffffff, 0, 10, 2); 
     
         directionalLight1.position.set(7, 6, 7);
         directionalLight2.position.set(-7, -6, -7);
@@ -27,13 +28,16 @@
         this.scene.add(directionalLight2);
         this.scene.add(directionalLight3);
         this.scene.add(pointLight);
+        this.scene.add(pointLight2);
     
         this.pointLight = pointLight;
+        this.pointLight2 = pointLight2;
     
         const dirLightHelper1 = new DirectionalLightHelper(directionalLight1, 1);
         const dirLightHelper2 = new DirectionalLightHelper(directionalLight2, 1);
         const dirLightHelper3 = new DirectionalLightHelper(directionalLight3, 1);
         const pointLightHelper = new PointLightHelper(pointLight, 1);
+        const pointLightHelper2 = new PointLightHelper(pointLight2, 1);
     
         const showLightHelpers = true;
     
@@ -42,6 +46,7 @@
           this.scene.add(dirLightHelper2);
           this.scene.add(dirLightHelper3);
           this.scene.add(pointLightHelper);
+          this.scene.add(pointLightHelper2);
         }
       }
     }

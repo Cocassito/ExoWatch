@@ -37,6 +37,7 @@ const Materials = {
     transparent: true,
     opacity: 0.5,
   }),
+  
 };
 
 export default Materials;

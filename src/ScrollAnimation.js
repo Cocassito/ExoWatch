@@ -40,12 +40,14 @@ class ScrollAnimation {
     });
 
     //ANIMAION DE LA SCENE
-    timeline.to(this.scene.rotation, { x: -Math.PI / 2.5 }, 0);
-    timeline.to(this.scene.position, { y: -2 }, 0);
+    this.originalRotation = { ...this.scene.rotation };
+    this.originalPosition = { ...this.scene.position };
+    timeline.to(this.scene.rotation, { x: -Math.PI / 2.5, duration: 10 }, 0);
+    timeline.to(this.scene.position, { y: -2, duration: 10 }, 0);
 
     //ANIMATION DU CACHE
     this.cacheMain.reverse().forEach((item, index) => {
-      timeline.to(item.position, { y: -4, duration: 3 }, 0.5);
+      timeline.to(item.position, { y: -4, duration: 10 }, 1 + index * 0.5);
     });
 
     //ORIGINE DE LA POSITION DE WHEELS3 + ANIMATION
@@ -55,11 +57,11 @@ class ScrollAnimation {
     pointLight.position.set(0, 3, 0);
     this.wheels[3].add(pointLight);
 
-    timeline.to(this.wheels[3].position, { z: 3, duration: 3 }, 2);
+    timeline.to(this.wheels[3].position, { z: 3, duration: 6 }, 2 + 0.5);
     timeline.to(
       this.wheels[3].rotation,
-      { y: 3.5, x: 6, z: 3.25, duration: 5 },
-      2
+      { y: 3.5, x: 6, z: 3.25, duration: 6 },
+      4
     );
 
     timeline.to(
@@ -302,6 +304,35 @@ class ScrollAnimation {
         item.rotation,
         { ...this.originalRotations[index], duration: 10 },
         98
+      );
+    });
+
+    timeline.to(this.scene.rotation, { z: 6.2, duration: 20 }, 110);
+    timeline.to(
+      this.scene.rotation,
+      { x: 0, y: 0, z: this.scene.rotation.z, duration: 10 },
+      135
+    );
+    timeline.to(
+      this.scene.position,
+      { x: 0, y: 0, z: this.scene.position.z, duration: 10 },
+      135
+    );
+
+    //ORIGINE DE LA POSITION DU CACHE + ANIMATION
+    this.originalPositions = this.caches.map((item) => ({ ...item.position }));
+    this.originalRotations = this.caches.map((item) => ({ ...item.rotation }));
+
+    this.caches.forEach((item, index) => {
+      timeline.to(
+        item.position,
+        { ...this.originalPositions[index], duration: 10 },
+        140 + index * 0.5 // Décalage progressif pour éviter les conflits
+      );
+      timeline.to(
+        item.rotation,
+        { ...this.originalRotations[index], duration: 10 },
+        140 + index * 0.5
       );
     });
   }

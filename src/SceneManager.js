@@ -37,6 +37,7 @@ class SceneManager {
     );
     this.camera.position.z = 5;
   }
+  
 
   initControls() {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);

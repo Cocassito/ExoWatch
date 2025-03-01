@@ -87,6 +87,7 @@ class ModelLoader {
     this.vis.forEach((vis) => (vis.material = Materials.vis));
     this.pink.forEach((pink) => (pink.material = Materials.pink));
   }
+  
 }
 
 export default ModelLoader;

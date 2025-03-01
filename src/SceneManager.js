@@ -14,7 +14,6 @@ class SceneManager {
     this.initScene();
     this.initCamera();
     this.initRenderer();
-    this.initHelpers(); // Ajout des helpers
     this.initControls(); // Ajout du contrôle de la caméra
 
     this.lightManager = new LightManager(this.scene);
@@ -41,7 +40,7 @@ class SceneManager {
 
   initControls() {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.controls.enableDamping = true; 
+    this.controls.enableDamping = false; 
     this.controls.enabled = false ; 
 
   }
@@ -52,13 +51,7 @@ class SceneManager {
     document.body.appendChild(this.renderer.domElement);
   }
 
-  initHelpers() {
-    const axesHelper = new AxesHelper(5);
-    this.scene.add(axesHelper);
-
-    const gridHelper = new GridHelper(10, 10);
-    this.scene.add(gridHelper);
-  }
+ 
 
   animate() {
     requestAnimationFrame(() => this.animate());

@@ -33,7 +33,7 @@ class ScrollAnimation {
       scrollTrigger: {
         trigger: document.body,
         start: "top top",
-        end: "+=1000%",
+        end: "+=1500%",
         scrub: 3,
         pin: document.body,
       },

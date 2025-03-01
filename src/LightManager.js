@@ -47,7 +47,7 @@
         const pointLightHelper3 = new PointLightHelper(pointLight3, 1);
         const pointLightHelper4 = new PointLightHelper(pointLight4, 1);
     
-        const showLightHelpers = true;
+        const showLightHelpers = false;
     
         if (showLightHelpers) {
           this.scene.add(dirLightHelper1);

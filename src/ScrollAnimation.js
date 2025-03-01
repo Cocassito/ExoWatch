@@ -33,7 +33,7 @@ class ScrollAnimation {
       scrollTrigger: {
         trigger: document.body,
         start: "top top",
-        end: "+=400%",
+        end: "+=1000%",
         scrub: 3,
         pin: document.body,
       },
@@ -42,6 +42,12 @@ class ScrollAnimation {
     //ANIMAION DE LA SCENE
     this.originalRotation = { ...this.scene.rotation };
     this.originalPosition = { ...this.scene.position };
+    timeline.fromTo(
+      "#textHow",
+      { opacity: 1 },
+      { opacity: 0, duration: 2 },
+      0
+    );
     timeline.to(this.scene.rotation, { x: -Math.PI / 2.5, duration: 10 }, 0);
     timeline.to(this.scene.position, { y: -2, duration: 10 }, 0);
 
@@ -335,6 +341,103 @@ class ScrollAnimation {
         140 + index * 0.5
       );
     });
+
+    //ORIGINE DE LA POSITION DES WHEELS CACHE + ANIMATION
+    this.originalPositions = this.wheelsCache.map((item) => ({
+      ...item.position,
+    }));
+    this.originalRotations = this.wheelsCache.map((item) => ({
+      ...item.rotation,
+    }));
+
+    // Function to handle opacity changes for elements
+    function createOpacityTimeline(
+      timeline,
+      elementId,
+      startOpacity,
+      endOpacity,
+      delay
+    ) {
+      timeline.fromTo(
+        elementId,
+        { opacity: startOpacity },
+        { opacity: endOpacity, duration: 2 },
+        delay
+      );
+    }
+
+    this.wheelsCache.forEach((item, index) => {
+      const baseTime = 150 + index * 0.5;
+
+      // Animating position and rotation
+      timeline.to(
+        item.position,
+        { ...this.originalPositions[index], duration: 10 },
+        baseTime
+      );
+      timeline.to(
+        item.rotation,
+        { ...this.originalRotations[index], duration: 10 },
+        baseTime
+      );
+
+      // Opacity animations for #textWheelCache, #textWheelCache2, and #textWheelCache3
+      createOpacityTimeline(timeline, "#textWheelCache", 0, 1, baseTime + 10);
+      createOpacityTimeline(timeline, "#textWheelCache2", 0, 1, baseTime + 20);
+      createOpacityTimeline(timeline, "#textWheelCache3", 0, 1, baseTime + 30);
+
+      // Opacity fade-out animations
+      createOpacityTimeline(timeline, "#textWheelCache", 1, 0, baseTime + 50);
+      createOpacityTimeline(timeline, "#textWheelCache2", 1, 0, baseTime + 60);
+      createOpacityTimeline(timeline, "#textWheelCache3", 1, 0, baseTime + 70);
+    });
+
+    //ORIGINE DE LA POSITION DES VIS + ANIMATION
+    this.originalPositions = this.vis.map((item) => ({ ...item.position }));
+    this.originalRotations = this.vis.map((item) => ({ ...item.rotation }));
+
+    this.vis.forEach((item, index) => {
+      timeline.to(
+        item.position,
+        { ...this.originalPositions[index], duration: 10 },
+        250 + index * 0.5 // Décalage progressif pour éviter les conflits
+      );
+      timeline.to(
+        item.rotation,
+        { ...this.originalRotations[index], duration: 10 },
+        250 + index * 0.5
+      );
+    });
+
+    this.originalPositions = this.pink.map((item) => ({ ...item.position }));
+    this.originalRotations = this.pink.map((item) => ({ ...item.rotation }));
+
+    this.pink.forEach((item, index) => {
+      timeline.to(
+        item.position,
+        { ...this.originalPositions[index], duration: 10 },
+        260 + index * 0.5 // Décalage progressif pour éviter les conflits
+      );
+      timeline.to(
+        item.rotation,
+        { ...this.originalRotations[index], duration: 10 },
+        260 + index * 0.5
+      );
+    });
+
+    timeline.fromTo(
+      "#textBearings",
+      { opacity: 0 },
+      { opacity: 1, duration: 2 },
+      270
+    );
+
+    timeline.fromTo(
+      "#textBearings",
+      { opacity: 1 },
+      { opacity: 0, duration: 2 },
+      290
+    );
   }
 }
 

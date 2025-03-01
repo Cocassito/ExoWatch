@@ -1,0 +1,16 @@
+#textHow {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    background-color: oklch(0.21 0.006 285.885);
+    top: 10%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    opacity: 1;
+    color: #f1f1f1;
+    box-shadow: 0 0 7px 2px rgba(255, 255, 255, 0.5);
+    width: 350px;
+  }
